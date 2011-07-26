@@ -11,10 +11,12 @@ Puppet::Face.define(:environment, '0.0.1') do
   EOT
 
   action :compile do
-    when_invoked do |name|
+    when_invoked do |name, options|
       unless catalog = Puppet::Face[:catalog, "current"].find(name)
         raise "Could not find catalog for environment #{name}"
       end
+
+      jj catalog
     end
   end
 end
